@@ -1,6 +1,6 @@
 {
   "name": "typed-css-modules",
-  "version": "0.9.1",
+  "version": "0.9.2-cc.1",
   "description": "Creates .d.ts files from CSS Modules .css files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,23 +15,10 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --coverage",
     "prepublish": "npm run build",
-    "prepare": "husky install"
+    "prepare": "tsc && chmod +x lib/cli.js"
   },
   "bin": {
     "tcm": "lib/cli.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Quramy/typed-css-modules.git"
-  },
-  "keywords": [
-    "css-modules",
-    "typescript"
-  ],
-  "author": "quramy",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.0.0"
   },
   "dependencies": {
     "camelcase": "^6.0.0",
