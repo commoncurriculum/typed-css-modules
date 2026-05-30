@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs';
 import { run } from './run';
 
-const yarg = yargs(hideBin(process.argv))
+// NOTE (commoncurriculum fork): import the `yargs` main entry (resolves to
+// `index.cjs`, real CommonJS) instead of the `yargs/yargs` subpath, and inline
+// `hideBin` as `process.argv.slice(2)`. yargs@17 marks the `./yargs` and
+// `./helpers` require targets as extensionless / `.js` files inside a
+// `"type":"module"` package, which Node >=22's `require(ESM)` loads as ESM and
+// then throws `ReferenceError: require is not defined in ES module scope`.
+// Going through the `.cjs` main entry avoids both broken subpaths.
+const yarg = yargs(process.argv.slice(2))
   .usage('Create .css.d.ts from CSS modules *.css files.\nUsage: $0 [options] <search directory>')
   .example('$0 src/styles', '')
   .example('$0 src -o dist', '')
